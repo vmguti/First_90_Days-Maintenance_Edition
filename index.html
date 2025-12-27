@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The First 90 Days: Maintenance Edition — Playbook + Minimal CMMS Bootstrapping</title>
+
+  <!-- TailwindCSS CDN (required) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Small extras without breaking “Tailwind-only” spirit */
+    html { scroll-behavior: smooth; }
+    .glass { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100 antialiased">
+
+  <!-- Top bar / Nav -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 glass">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-cyan-400 to-violet-500 p-[1px]">
+            <div class="h-full w-full rounded-xl bg-slate-950 flex items-center justify-center">
+              <span class="text-sm font-black tracking-tight">90D</span>
+            </div>
+          </div>
+          <div class="leading-tight">
+            <div class="font-semibold tracking-tight">The First 90 Days</div>
+            <div class="text-xs text-slate-300">Maintenance Edition</div>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-7 text-sm text-slate-200">
+          <a class="hover:text-white transition" href="#pain">Pain</a>
+          <a class="hover:text-white transition" href="#how">Cómo funciona</a>
+          <a class="hover:text-white transition" href="#includes">Qué incluye</a>
+          <a class="hover:text-white transition" href="#faq">FAQ</a>
+          <a class="inline-flex items-center justify-center rounded-xl bg-white text-slate-950 px-4 py-2 font-semibold hover:bg-slate-100 transition"
+             href="#contact">Pedir acceso</a>
+        </nav>
+
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10 transition" aria-label="Abrir menú">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-slate-950/90 glass">
+      <div class="mx-auto max-w-7xl px-4 py-4 flex flex-col gap-3 text-sm">
+        <a class="rounded-xl px-3 py-2 hover:bg-white/10 transition" href="#pain">Pain</a>
+        <a class="rounded-xl px-3 py-2 hover:bg-white/10 transition" href="#how">Cómo funciona</a>
+        <a class="rounded-xl px-3 py-2 hover:bg-white/10 transition" href="#includes">Qué incluye</a>
+        <a class="rounded-xl px-3 py-2 hover:bg-white/10 transition" href="#faq">FAQ</a>
+        <a class="rounded-xl px-3 py-2 bg-white text-slate-950 font-semibold hover:bg-slate-100 transition" href="#contact">Pedir acceso</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" class="relative overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <img
+        src="https://img.freepik.com/foto-gratis/ingenieros-industria-40-plantas-industriales-que-controlan-maquinas-automatizadas_482257-120564.jpg"
+        alt="Industria y mantenimiento - fondo"
+        class="h-full w-full object-cover opacity-35"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/70 to-slate-950"></div>
+      <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/25 blur-3xl"></div>
+      <div class="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-violet-500/25 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-14 sm:pt-24 sm:pb-20">
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-slate-200">
+            <span class="h-2 w-2 rounded-full bg-cyan-400"></span>
+            Playbook hiperpráctico + CMMS mínimo (Excel) “defendible”
+          </div>
+
+          <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05]">
+            No te quemes en tu nuevo puesto de <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400">Jefe de Mantenimiento</span>.
+          </h1>
+
+          <p class="mt-5 text-lg text-slate-200 max-w-2xl">
+            <strong>Los primeros 90 días</strong> deciden tu reputación. Este sistema por semanas te dice exactamente
+            <em>qué hacer (y qué NO tocar)</em> cuando te ponen al frente de un departamento sin estructura, recursos ni apoyo.
+          </p>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href="#contact"
+               class="inline-flex items-center justify-center rounded-2xl bg-white text-slate-950 px-6 py-3 font-semibold hover:bg-slate-100 transition">
+              Quiero el playbook
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+            <a href="#how"
+               class="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white hover:bg-white/10 transition">
+              Ver cómo funciona
+            </a>
+          </div>
+
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="text-sm font-semibold">Semana 1–2</div>
+              <div class="mt-1 text-xs text-slate-300">Qué NO tocar + mapa político</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="text-sm font-semibold">Semana 3–6</div>
+              <div class="mt-1 text-xs text-slate-300">Diagnóstico mínimo viable (con evidencias)</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="text-sm font-semibold">Semana 7–12</div>
+              <div class="mt-1 text-xs text-slate-300">Primeras victorias visibles + rutina defendible</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right visual card -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-3xl border border-white/10 bg-white/5 overflow-hidden shadow-2xl">
+            <div class="absolute inset-0">
+              <img
+                src="https://img.freepik.com/foto-gratis/personas-que-ocupan-logistica-almacen_23-2149128342.jpg"
+                alt="Equipo de mantenimiento en almacén"
+                class="h-full w-full object-cover opacity-55"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+            </div>
+
+            <div class="relative p-6 sm:p-7">
+              <div class="flex items-center justify-between">
+                <div class="text-sm font-semibold text-slate-100">Checklist de supervivencia</div>
+                <div class="text-xs text-slate-300">v1.0</div>
+              </div>
+
+              <div class="mt-4 space-y-3">
+                <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+                  <div class="text-xs text-slate-300">Hoy</div>
+                  <div class="mt-1 font-semibold">Define “crítico” sin discutir: datos + riesgo</div>
+                  <div class="mt-2 flex items-center gap-2 text-xs text-slate-300">
+                    <span class="inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
+                    30 min con Producción + 30 min con Almacén
+                  </div>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+                  <div class="text-xs text-slate-300">Esta semana</div>
+                  <div class="mt-1 font-semibold">CMMS mínimo: Excel + historial defendible</div>
+                  <div class="mt-2 flex items-center gap-2 text-xs text-slate-300">
+                    <span class="inline-flex h-2 w-2 rounded-full bg-violet-400"></span>
+                    Plantilla de OT + lista de activos + KPIs básicos
+                  </div>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+                  <div class="text-xs text-slate-300">Antes del día 30</div>
+                  <div class="mt-1 font-semibold">Presenta el “One-Page War Room” a Dirección</div>
+                  <div class="mt-2 flex items-center gap-2 text-xs text-slate-300">
+                    <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+                    Evidencias, riesgos y 3 decisiones que deben tomar
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-xs text-slate-300">
+                Diseñado para situaciones reales: “trabaja con lo que hay”, sin software y con presión por resultados.
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-3 text-xs text-slate-400">
+            Imágenes de referencia: Freepik (enlaces incluidos más abajo).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain / Reality -->
+  <section id="pain" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Lo que te está matando no es “mantenimiento”.</h2>
+        <p class="mt-4 text-slate-200 text-lg">
+          Es el caos: urgencias 24/7, cero históricos, pocos repuestos, equipos viejos, “Producción manda”, y Dirección
+          exigiendo resultados como si todo ya estuviera bien.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div class="text-sm font-semibold">“Nadie te dice por dónde empezar”</div>
+          <p class="mt-2 text-sm text-slate-300">Te lanzan a lava fundida: sin onboarding real, sin mapa del negocio.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div class="text-sm font-semibold">CMMS inexistente (o inútil)</div>
+          <p class="mt-2 text-sm text-slate-300">Te piden KPIs, pero no hay datos. O el sistema es “propiedad de IT”.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div class="text-sm font-semibold">Cero recursos, misma exigencia</div>
+          <p class="mt-2 text-sm text-slate-300">“Resuélvelo sin invertir”: sin herramientas, sin planos, sin stock.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div class="text-sm font-semibold">Política interna + desgaste</div>
+          <p class="mt-2 text-sm text-slate-300">Veteranos escépticos, presión por paros, y riesgo real de burnout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="py-16 sm:py-20 border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-5">
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Un sistema por semanas, no por teoría.</h2>
+          <p class="mt-4 text-slate-200">
+            En vez de “mantenimiento preventivo vs predictivo”, esto te da una ruta de acción con entregables
+            que puedes enseñar a Dirección y al equipo.
+          </p>
+
+          <div class="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div class="text-sm font-semibold">Resultado esperado en 90 días</div>
+            <ul class="mt-3 space-y-2 text-sm text-slate-300 list-disc pl-5">
+              <li>Inventario mínimo de activos + criticidad defendible</li>
+              <li>Historial básico de fallas y órdenes (Excel/Sheets)</li>
+              <li>Rutina semanal de planificación + “primeras victorias”</li>
+              <li>KPIs simples (y honestos) para alinear expectativas</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div class="grid gap-5">
+            <!-- Phase cards -->
+            <div class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <div class="text-sm text-slate-300">Semana 1–2</div>
+                  <div class="text-xl font-bold">Stabilize & Don’t Break Things</div>
+                </div>
+                <span class="rounded-full bg-cyan-400/15 text-cyan-200 text-xs font-semibold px-3 py-1 border border-cyan-400/20">Anti-caos</span>
+              </div>
+              <div class="mt-4 grid sm:grid-cols-2 gap-4 text-sm text-slate-200">
+                <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                  <div class="font-semibold">Qué NO tocar</div>
+                  <p class="mt-2 text-slate-300">Evita “cambios heroicos” sin entender riesgos, cultura y producción.</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                  <div class="font-semibold">Mapa político</div>
+                  <p class="mt-2 text-slate-300">Quién decide, quién bloquea, y qué duele realmente en el negocio.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <div class="text-sm text-slate-300">Semana 3–6</div>
+                  <div class="text-xl font-bold">Minimum Viable Diagnosis</div>
+                </div>
+                <span class="rounded-full bg-violet-400/15 text-violet-200 text-xs font-semibold px-3 py-1 border border-violet-400/20">Evidencias</span>
+              </div>
+              <div class="mt-4 grid sm:grid-cols-3 gap-4 text-sm text-slate-200">
+                <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                  <div class="font-semibold">Top 10 fallas</div>
+                  <p class="mt-2 text-slate-300">Registra lo que rompe producción y cuánto cuesta (tiempo, calidad, seguridad).</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                  <div class="font-semibold">Criticidad simple</div>
+                  <p class="mt-2 text-slate-300">Riesgo + impacto, sin discusiones infinitas ni “religión de RCM”.</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                  <div class="font-semibold">CMMS mínimo</div>
+                  <p class="mt-2 text-slate-300">Excel/Sheets listo para auditoría básica: OT, activos, repuestos, historial.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <div class="text-sm text-slate-300">Semana 7–12</div>
+                  <div class="text-xl font-bold">Visible Wins & Weekly Rhythm</div>
+                </div>
+                <span class="rounded-full bg-emerald-400/15 text-emerald-200 text-xs font-semibold px-3 py-1 border border-emerald-400/20">Tracción</span>
+              </div>
+              <div class="mt-4 grid sm:grid-cols-2 gap-4 text-sm text-slate-200">
+                <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                  <div class="font-semibold">Victorias visibles</div>
+                  <p class="mt-2 text-slate-300">Pequeñas mejoras con impacto: stock crítico, PM mínimo, orden y seguridad.</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                  <div class="font-semibold">War Room 1-pager</div>
+                  <p class="mt-2 text-slate-300">Un resumen semanal para Dirección: riesgos, bloqueos, decisiones requeridas.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Supporting image strip -->
+          <div class="mt-6 grid grid-cols-3 gap-3">
+            <img class="h-24 w-full object-cover rounded-2xl border border-white/10"
+                 src="https://img.freepik.com/foto-gratis/equipo-ingenieria-trabajando-fabrica-inteligente-recopilando-analizando-datos_482257-120515.jpg"
+                 alt="Fábrica inteligente" loading="lazy"/>
+            <img class="h-24 w-full object-cover rounded-2xl border border-white/10"
+                 src="https://img.freepik.com/foto-gratis/dos-trabajadores-felices-trabajando-maquina-comunicandose-hombre-negocios-senior-que-supervisa-edificio-industrial_637285-4190.jpg"
+                 alt="Supervisión en planta" loading="lazy"/>
+            <img class="h-24 w-full object-cover rounded-2xl border border-white/10"
+                 src="https://img.freepik.com/foto-gratis/experto-automoviles-cliente-buscan-nuevas-piezas_482257-76137.jpg"
+                 alt="Gestión de piezas y repuestos" loading="lazy"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <section id="includes" class="py-16 sm:py-20 border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Qué incluye “The First 90 Days: Maintenance Edition”</h2>
+          <p class="mt-4 text-slate-200">
+            Material listo para usar: checklists, preguntas incómodas para Dirección, señales de alerta y un sistema mínimo
+            para operar incluso sin CMMS.
+          </p>
+        </div>
+        <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-white text-slate-950 px-6 py-3 font-semibold hover:bg-slate-100 transition">
+          Solicitar demo / acceso
+        </a>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="text-lg font-bold">Playbook por semanas</div>
+          <p class="mt-2 text-sm text-slate-300">Acciones concretas día a día con entregables, sin “paja” teórica.</p>
+          <ul class="mt-4 space-y-2 text-sm text-slate-200 list-disc pl-5">
+            <li>Plan 1–2 / 3–6 / 7–12 semanas</li>
+            <li>Qué medir cuando no hay datos</li>
+            <li>Cómo evitar “cambios suicidas”</li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="text-lg font-bold">Minimal CMMS Bootstrapping</div>
+          <p class="mt-2 text-sm text-slate-300">Plantillas Excel/Sheets para operar, registrar y justificar decisiones.</p>
+          <ul class="mt-4 space-y-2 text-sm text-slate-200 list-disc pl-5">
+            <li>Órdenes de trabajo + historial</li>
+            <li>Activos + criticidad</li>
+            <li>Repuestos críticos + faltantes</li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="text-lg font-bold">KPIs simples (defendibles)</div>
+          <p class="mt-2 text-sm text-slate-300">Indicadores honestos para alinear expectativas con Dirección.</p>
+          <ul class="mt-4 space-y-2 text-sm text-slate-200 list-disc pl-5">
+            <li>Backlog (real) y tendencia</li>
+            <li>Top paros / causas</li>
+            <li>MTTR/MTBF “mínimos viables”</li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="text-lg font-bold">Preguntas incómodas</div>
+          <p class="mt-2 text-sm text-slate-300">Guiones para pedir recursos sin sonar “quejica”.</p>
+          <ul class="mt-4 space-y-2 text-sm text-slate-200 list-disc pl-5">
+            <li>¿Quién aprueba paradas?</li>
+            <li>¿Qué riesgo aceptamos?</li>
+            <li>¿Qué pasa si NO invertimos?</li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="text-lg font-bold">Señales de alerta</div>
+          <p class="mt-2 text-sm text-slate-300">“Red flags” típicas antes de quemarte o fracasar.</p>
+          <ul class="mt-4 space-y-2 text-sm text-slate-200 list-disc pl-5">
+            <li>“No podemos parar nunca”</li>
+            <li>“Arregla con material del desecho”</li>
+            <li>“Si funciona, no lo toques”</li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 overflow-hidden relative">
+          <div class="absolute inset-0">
+            <img
+              src="https://img.freepik.com/foto-gratis/joven-trabajador-manual-que-presenta-nueva-estrategia-comercial-gerentes-empresa-sus-colegas-fabrica_637285-4142.jpg"
+              alt="Presentación y alineación con gerencia"
+              class="h-full w-full object-cover opacity-35"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent"></div>
+          </div>
+          <div class="relative">
+            <div class="text-lg font-bold">One-Pager “War Room”</div>
+            <p class="mt-2 text-sm text-slate-200">
+              Un resumen semanal para Dirección: situación real, bloqueos, decisiones requeridas y próximos pasos.
+            </p>
+            <div class="mt-4 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200">
+              Ideal si te exigen resultados sin darte soporte
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image credits / links (your original Freepik URLs) -->
+      <div class="mt-10 text-xs text-slate-400">
+        <div class="font-semibold text-slate-300">Fuentes de imágenes (Freepik):</div>
+        <ul class="mt-2 list-disc pl-5 space-y-1">
+          <li><a class="underline hover:text-white" href="https://www.freepik.es/foto-gratis/personas-que-ocupan-logistica-almacen_19185050.htm#fromView=search&page=1&position=9&uuid=e2075323-4b70-427f-a081-47ad52d6b91d&query=maintenace+work+management" target="_blank" rel="noreferrer">Personas en logística/almacén</a></li>
+          <li><a class="underline hover:text-white" href="https://www.freepik.es/foto-gratis/ingenieros-industria-40-plantas-industriales-que-controlan-maquinas-automatizadas_416930375.htm#fromView=search&page=1&position=17&uuid=e2075323-4b70-427f-a081-47ad52d6b91d&query=maintenace+work+management" target="_blank" rel="noreferrer">Ingenieros industria 4.0</a></li>
+          <li><a class="underline hover:text-white" href="https://www.freepik.es/foto-gratis/joven-trabajador-manual-que-presenta-nueva-estrategia-comercial-gerentes-empresa-sus-colegas-fabrica_25856076.htm#fromView=search&page=4&position=47&uuid=e2075323-4b70-427f-a081-47ad52d6b91d&query=maintenace+work+management" target="_blank" rel="noreferrer">Presentación en fábrica</a></li>
+          <li><a class="underline hover:text-white" href="https://www.freepik.es/foto-gratis/experto-automoviles-cliente-buscan-nuevas-piezas_135357638.htm#fromView=search&page=4&position=42&uuid=e2075323-4b70-427f-a081-47ad52d6b91d&query=maintenace+work+management" target="_blank" rel="noreferrer">Piezas / repuestos</a></li>
+          <li><a class="underline hover:text-white" href="https://www.freepik.es/foto-gratis/dos-trabajadores-felices-trabajando-maquina-comunicandose-hombre-negocios-senior-que-supervisa-edificio-industrial_25856179.htm#fromView=search&page=3&position=44&uuid=e2075323-4b70-427f-a081-47ad52d6b91d&query=maintenace+work+management" target="_blank" rel="noreferrer">Supervisión en planta</a></li>
+          <li><a class="underline hover:text-white" href="https://www.freepik.es/foto-gratis/equipo-ingenieria-trabajando-fabrica-inteligente-recopilando-analizando-datos_416930321.htm#fromView=search&page=3&position=34&uuid=e2075323-4b70-427f-a081-47ad52d6b91d&query=maintenace+work+management" target="_blank" rel="noreferrer">Equipo analizando datos</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials / Social proof -->
+  <section class="py-16 sm:py-20 border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Suena a tu realidad, ¿verdad?</h2>
+        <p class="mt-4 text-slate-200">
+          Esto está diseñado para los casos más comunes: “departamento moribundo”, “pocos recursos”, “todo es correctivo”,
+          “producción rompe / mantenimiento arregla”.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <p class="text-sm text-slate-200">“Me pidieron estandarizar, pero no había software, ni planos, ni herramientas. Este enfoque por semanas es lo primero que me da orden.”</p>
+          <div class="mt-4 text-xs text-slate-400">— Supervisor turno noche (planta sin CMMS)</div>
+        </div>
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <p class="text-sm text-slate-200">“El mayor cambio fue el 1-pager para dirección. Por fin dejamos de discutir opiniones: ahora discutimos evidencias.”</p>
+          <div class="mt-4 text-xs text-slate-400">— Responsable de mantenimiento (industria de proceso)</div>
+        </div>
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <p class="text-sm text-slate-200">“Siempre hay déficit de presupuesto. La clave es diagnosticar rápido, mostrar riesgos y pedir 3 decisiones claras.”</p>
+          <div class="mt-4 text-xs text-slate-400">— Ex gerente de planta / mantenimiento</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 sm:py-20 border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Preguntas frecuentes</h2>
+        <p class="mt-4 text-slate-200">Respuestas directas para un contexto de presión real.</p>
+      </div>
+
+      <div class="mt-10 grid gap-4 max-w-3xl">
+        <details class="group rounded-2xl border border-white/10 bg-white/5 p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between">
+            <span class="font-semibold">¿Sirve si mi empresa ya tiene CMMS?</span>
+            <span class="ml-4 text-slate-300 group-open:rotate-180 transition">
+              ▼
+            </span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-300">
+            Sí. El “bootstrapping” te ayuda a <strong>ordenar datos mínimos</strong>, depurar lo crítico y crear
+            una rutina defendible. Si el CMMS actual “no sirve”, tendrás una base paralela para salir del caos.
+          </p>
+        </details>
+
+        <details class="group rounded-2xl border border-white/10 bg-white/5 p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between">
+            <span class="font-semibold">¿Esto es para mantenimiento industrial o también edificios/flotas?</span>
+            <span class="ml-4 text-slate-300 group-open:rotate-180 transition">▼</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-300">
+            Está pensado para industrial, pero los principios de <strong>diagnóstico rápido, criticidad y rutina</strong>
+            aplican muy bien a edificios, hoteles y flotas (especialmente en entornos con pocas herramientas).
+          </p>
+        </details>
+
+        <details class="group rounded-2xl border border-white/10 bg-white/5 p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between">
+            <span class="font-semibold">¿Necesito invertir en sensores o mantenimiento predictivo?</span>
+            <span class="ml-4 text-slate-300 group-open:rotate-180 transition">▼</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-300">
+            No para empezar. Primero se estabiliza: <strong>seguridad, criticidad, historial básico</strong> y un
+            sistema mínimo de órdenes. Lo predictivo puede venir después, cuando ya tengas datos y control.
+          </p>
+        </details>
+
+        <details class="group rounded-2xl border border-white/10 bg-white/5 p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between">
+            <span class="font-semibold">¿Qué pasa si Dirección no apoya?</span>
+            <span class="ml-4 text-slate-300 group-open:rotate-180 transition">▼</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-300">
+            El playbook incluye <strong>preguntas incómodas</strong> y un formato “war room” para forzar decisiones.
+            Si no hay voluntad real, al menos tendrás evidencia “en blanco y negro” para protegerte y decidir.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Form -->
+  <section id="contact" class="py-16 sm:py-20 border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-5">
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Pide acceso al playbook</h2>
+          <p class="mt-4 text-slate-200">
+            Cuéntame tu contexto y te respondo con el siguiente paso (demo, acceso a plantilla o entrevista corta).
+          </p>
+
+          <div class="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6">
+            <div class="text-sm font-semibold">Para quién es ideal</div>
+            <ul class="mt-3 space-y-2 text-sm text-slate-300 list-disc pl-5">
+              <li>Nuevos jefes/encargados de mantenimiento</li>
+              <li>Transición a planta/industria nueva (curva de aprendizaje alta)</li>
+              <li>Entornos sin CMMS o con CMMS “chungo”</li>
+              <li>Presión por producción + cero recursos</li>
+            </ul>
+          </div>
+
+          <div class="mt-6 text-sm text-slate-300">
+            <div class="font-semibold text-slate-200">Contacto directo</div>
+            <div class="mt-2">Email: <a class="underline hover:text-white" href="mailto:vmtugi@gmail.com">vmtugi@gmail.com</a></div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="text-lg font-bold">Formulario</div>
+                <div class="mt-1 text-sm text-slate-300">Envío directo a tu email (sin backend).</div>
+              </div>
+              <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200">
+                Endpoint: formsubmit.co
+              </span>
+            </div>
+
+            <!-- FORM: using FormSubmit endpoint with the provided email -->
+            <form
+              class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4"
+              action="https://formsubmit.co/vmtugi@gmail.com"
+              method="POST"
+            >
+              <!-- FormSubmit options -->
+              <input type="hidden" name="_subject" value="New lead — The First 90 Days: Maintenance Edition" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <!-- After submit, redirects to same page with a thank-you hash -->
+              <input type="hidden" name="_next" value="#thanks" />
+
+              <div>
+                <label class="text-sm text-slate-200" for="name">Nombre</label>
+                <input id="name" name="name" required
+                  class="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
+                  placeholder="Tu nombre" />
+              </div>
+
+              <div>
+                <label class="text-sm text-slate-200" for="email">Email</label>
+                <input id="email" type="email" name="email" required
+                  class="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
+                  placeholder="tu@email.com" />
+              </div>
+
+              <div>
+                <label class="text-sm text-slate-200" for="company">Empresa</label>
+                <input id="company" name="company"
+                  class="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
+                  placeholder="Nombre de empresa (opcional)" />
+              </div>
+
+              <div>
+                <label class="text-sm text-slate-200" for="role">Rol</label>
+                <input id="role" name="role"
+                  class="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
+                  placeholder="Jefe / Supervisor / Planner / Reliability..." />
+              </div>
+
+              <div>
+                <label class="text-sm text-slate-200" for="plant">Tipo de operación</label>
+                <select id="plant" name="operation"
+                  class="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+                  <option value="">Selecciona (opcional)</option>
+                  <option>Manufactura / Ensamble</option>
+                  <option>Proceso (alimentos, químico, etc.)</option>
+                  <option>Logística / Almacén</option>
+                  <option>Servicios / Edificios / Hoteles</option>
+                  <option>Flota / Transporte</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-sm text-slate-200" for="cmms">Estado CMMS</label>
+                <select id="cmms" name="cmms_status"
+                  class="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+                  <option value="">Selecciona (opcional)</option>
+                  <option>No tenemos CMMS</option>
+                  <option>Tenemos CMMS pero no se usa</option>
+                  <option>CMMS “no sirve” / datos malos</option>
+                  <option>CMMS OK pero quiero orden</option>
+                </select>
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="text-sm text-slate-200" for="painPoint">Tu mayor problema ahora mismo</label>
+                <input id="painPoint" name="biggest_pain"
+                  class="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
+                  placeholder="Ej: todo es correctivo, no hay repuestos, producción no deja parar, equipo quemado..." />
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="text-sm text-slate-200" for="message">Mensaje</label>
+                <textarea id="message" name="message" rows="5"
+                  class="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
+                  placeholder="Cuéntame brevemente el contexto: tamaño de planta, equipo, urgencias, expectativas de dirección..."></textarea>
+              </div>
+
+              <div class="sm:col-span-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+                <p class="text-xs text-slate-400">
+                  Al enviar, recibirás respuesta al email indicado. (Si quieres, también puedes escribir a <a class="underline hover:text-white" href="mailto:vmtugi@gmail.com">vmtugi@gmail.com</a>.)
+                </p>
+                <button type="submit"
+                  class="inline-flex items-center justify-center rounded-2xl bg-white text-slate-950 px-6 py-3 font-semibold hover:bg-slate-100 transition">
+                  Enviar
+                </button>
+              </div>
+            </form>
+
+            <!-- Simple thank-you anchor -->
+            <div id="thanks" class="mt-6 hidden rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4 text-sm text-emerald-200">
+              ¡Gracias! Si el formulario te redirigió aquí, tu mensaje se envió correctamente.
+            </div>
+
+            <script>
+              // If URL contains #thanks, show message
+              if (window.location.hash === "#thanks") {
+                const el = document.getElementById("thanks");
+                if (el) el.classList.remove("hidden");
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div class="text-sm text-slate-400">
+          © <span id="year"></span> The First 90 Days: Maintenance Edition — Playbook + Minimal CMMS Bootstrapping
+        </div>
+        <div class="flex items-center gap-4 text-sm">
+          <a href="#top" class="text-slate-300 hover:text-white transition">Arriba</a>
+          <a href="#contact" class="text-slate-300 hover:text-white transition">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Small JS (menu) -->
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const btn = document.getElementById("menuBtn");
+    const menu = document.getElementById("mobileMenu");
+    btn?.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+
+    // Close mobile menu when clicking a link
+    menu?.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => menu.classList.add("hidden"));
+    });
+  </script>
+
+</body>
+</html>
